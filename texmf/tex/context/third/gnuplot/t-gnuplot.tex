@@ -52,18 +52,26 @@
 
 \unprotect
 
-\def\c!terminal {terminal}
-\def\c!options  {options}
-\def\c!pointset {pointset}
-\def\c!purge    {purge}
+%D create control sequence \type{\????gnuplot}
+\installnamespace{gnuplot}
 
-%D MPextensions
+\startinterface all
+	\setinterfaceconstant {terminal} {terminal}
+	\setinterfaceconstant {options}  {options}
+	\setinterfaceconstant {pointset} {pointset}
+	\setinterfaceconstant {purge}    {purge}
+\stopinterface
+
+%D MPinstance
 %D
-%D XXX
-%D if possible, they should be specific to \type{\startGNUPLOTgraphic},
-%D so unvisible to \type{MPcode}
-%D (probably something like \type+\appendtoks ... to\everyGNUPLOTgraphic+)
-\startMPextensions
+%D To prevent interference definition of an individual MP instance for this module
+\defineMPinstance
+	[\????gnuplot]
+	[\s!format=metafun,
+	 \c!method=\s!double]
+
+%D MPdefinitions
+\startMPdefinitions{\????gnuplot}
 	% load metapost macros (only once)
 	input mp-gnuplot.mp ;
 	% number of points defined with \setupGNUPLOTterminal[pointset=...]
@@ -96,7 +104,7 @@
 	
 	gp_points_with := gp_points_with_\@@GNUPLOT@term@context@points;
 	
-\stopMPextensions
+\stopMPdefinitions
 
 %D (hopefully) temporary solution for handling the color in expressions like
 %D    \type+draw \sometxt{...} withcolor red+
@@ -396,10 +404,10 @@
 % \resetGNUPLOTgraphics{name} undefines any gnuplot graphic defined with \startGNUPLOTgraphic[name][number]
 \def\resetGNUPLOTgraphics#1%
 	{\doloop
-		{\doifMPgraphicelse{gpg:#1:\recurselevel}%
+		{\doifMPgraphicelse{\????gnuplot::gpg:#1:\recurselevel}%
 		% TODO: be aware - @@MPG is low-level ConTeXt variable which might change without notice,
 		% it would be better to call this \undefineMPgraphic{gpg:#1:\recurselevel} or something similar
-		{\letbeundefined{@@MPGgpg:#1:\recurselevel}}%
+		{\letbeundefined{\????gnuplot::@@MPGgpg:#1:\recurselevel}}%
 		{\exitloop}}%
 	\doloop
 		{\doifdefinedelse{TKZp:#1:\recurselevel}%
@@ -492,14 +500,14 @@
 		{\doifelse{#2}{}%
 			% if no explicit figure number was specified, include all the figures
 			{\doloop
-				{\doifMPgraphicelse{gpg:#1:\recurselevel}%
-				{\scale[#3]{\reuseMPgraphic{gpg:#1:\recurselevel}}}%
+				{\doifMPgraphicelse{\????gnuplot::gpg:#1:\recurselevel}%
+				{\scale[#3]{\reuseMPgraphic{\????gnuplot::gpg:#1:\recurselevel}}}%
 				{\exitloop}}}%
 			% if numbers were specified, include the figures specified in the list only
 			{\begingroup
 				\def\useGNUPLOTgraphicN##1{\doifMPgraphicelse
-					{gpg:#1:##1}%
-					{\scale[#3]{\reuseMPgraphic{gpg:#1:##1}}}%
+					{\????gnuplot::gpg:#1:##1}%
+					{\scale[#3]{\reuseMPgraphic{\????gnuplot::gpg:#1:##1}}}%
 					% if graphic doesn't exist: draw a dummy frame instead and warn the user
 					{\scale[#3]{\framed[frame=on,width=5in,height=3in,align={middle,lohi}]{GNUPLOT graphic #1, Nr. ##1 doesn't exist}}}}%
 				\processcommalist[#2]\useGNUPLOTgraphicN
@@ -546,14 +554,14 @@
 		{\doifelse{#2}{}%
 			% if no explicit figure number was specified, include all the figures
 			{\doloop
-				{\doifMPgraphicelse{gpg:#1:\recurselevel}%
-				{\scale[#3]{\reuseMPgraphic{gpg:#1:\recurselevel}}}%
+				{\doifMPgraphicelse{\????gnuplot::gpg:#1:\recurselevel}%
+				{\scale[#3]{\reuseMPgraphic{\????gnuplot::gpg:#1:\recurselevel}}}%
 				{\exitloop}}}%
 			% if numbers were specified, include the figures specified in the list only
 			{\begingroup
 				\def\useGNUPLOTgraphicN##1{\doifMPgraphicelse
-					{gpg:#1:##1}%
-					{\scale[#3]{\reuseMPgraphic{gpg:#1:##1}}}%
+					{\????gnuplot::gpg:#1:##1}%
+					{\scale[#3]{\reuseMPgraphic{\????gnuplot::gpg:#1:##1}}}%
 					% if graphic doesn't exist: draw a dummy frame instead and warn the user
 					{\scale[#3]{\framed[frame=on,width=5in,height=3in,align={middle,lohi}]{GNUPLOT graphic #1, Nr. ##1 doesn't exist}}}}%
 				\processcommalist[#2]\useGNUPLOTgraphicN
@@ -662,7 +670,7 @@
           \def\obeyedline{}% <- thanks to this
           \dosingleargument\dostartGNUPLOTgraphic}%
       \long\def\dostartGNUPLOTgraphic[##1]##2\stopGNUPLOTgraphic
-         {\startreusableMPgraphic{gpg:#1:##1}##2\stopreusableMPgraphic}%
+         {\startreusableMPgraphic{\????gnuplot::gpg:#1:##1}##2\stopreusableMPgraphic}%
       %------------------
       % for TikZ terminal
       %------------------
