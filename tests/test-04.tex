@@ -1,0 +1,18 @@
+\usemodule
+	[gnuplot]
+
+%% Test inclusions
+\startGNUPLOTinclusions
+	set title "Foo Bar"
+	set key left reverse;
+\stopGNUPLOTinclusions
+
+\starttext
+
+\startGNUPLOTscript [myfunction]
+	plot x
+\stopGNUPLOTscript
+
+\useGNUPLOTgraphic [myfunction]
+
+\stoptext

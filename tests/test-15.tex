@@ -1,0 +1,24 @@
+\usemodule
+	[gnuplot]
+
+%% Test TeX point sets
+
+\setupGNUPLOTterminal
+	[context]
+	[points=tex,
+	 pointset=myset]
+
+\defineconversion
+	[myset]
+	[-,{\ss x},\mathematics{\circ}]
+
+\starttext
+
+\startGNUPLOTscript [myfunction]
+	plot 'somedata' using 1:1 with points, \
+		'' using 1:2 with points pointtype 2
+\stopGNUPLOTscript
+
+\useGNUPLOTgraphic [myfunction]
+
+\stoptext

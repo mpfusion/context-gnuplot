@@ -1,0 +1,16 @@
+\usemodule
+	[gnuplot]
+
+\setupGNUPLOT
+	[terminal=pdf]
+
+\starttext
+
+%% Test of pdf terminal
+\startGNUPLOTscript [myfunction]
+	plot x
+\stopGNUPLOTscript
+
+\useGNUPLOTgraphic [myfunction]
+
+\stoptext

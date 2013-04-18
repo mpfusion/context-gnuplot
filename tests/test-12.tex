@@ -1,0 +1,17 @@
+\usemodule
+	[gnuplot]
+
+\starttext
+
+%% Test if graph is updated if terminal is changed
+\startGNUPLOTscript [myfunction]
+	plot sin(3*x)
+\stopGNUPLOTscript
+
+\useGNUPLOTgraphic [myfunction]
+
+\setupGNUPLOT [terminal=pdf]
+
+\useGNUPLOTgraphic [myfunction]
+
+\stoptext

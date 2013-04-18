@@ -1,0 +1,23 @@
+\usemodule
+	[gnuplot]
+
+\starttext
+
+\startGNUPLOTscript [myfunction]
+	plot x
+\stopGNUPLOTscript
+
+\useGNUPLOTgraphic [myfunction]
+
+%% Test interference caused by gnuplots MP definitions leaking into global
+%% name space.
+\startMPcode
+	%% gp_scale_linewidth should be unknown
+	if known gp_scale_linewidth:
+		draw textext("Yes, gp_scale_linewidth is known.");
+	else:
+		draw textext("No, gp_scale_linewidth is unknown.");
+	fi;
+\stopMPcode
+
+\stoptext

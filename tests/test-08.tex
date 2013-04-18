@@ -1,0 +1,12 @@
+\usemodule
+	[gnuplot]
+
+\starttext
+
+%% Test individual inclusion of externally generated gnuplot graph
+%% with context terminal and additional parameters as third argument
+\processGNUPLOTfile [foo] [twoplots]
+
+\useGNUPLOTgraphic [foo] [2] [linewidth=10]
+
+\stoptext

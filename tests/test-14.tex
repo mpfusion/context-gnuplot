@@ -1,0 +1,26 @@
+\usemodule
+	[gnuplot]
+
+\starttext
+
+%% Test default option
+\setupGNUPLOTterminal
+	[context]
+	[width=6cm,
+	 height=3cm]
+
+\startGNUPLOTscript [myfunction]
+	plot sin(2*x)
+\stopGNUPLOTscript
+
+\startGNUPLOTscript [myfunction2]
+	plot sin(x)
+\stopGNUPLOTscript
+
+\useGNUPLOTgraphic [myfunction] [width=default, height=default]
+
+\setupGNUPLOT [terminal=pdf]
+
+\useGNUPLOTgraphic [myfunction2]
+
+\stoptext

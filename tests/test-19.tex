@@ -1,0 +1,29 @@
+\usemodule
+	[gnuplot]
+
+\starttext
+
+%% Test individual inclusion of several externally generated gnuplot graphs
+%% with context terminal and check if the first argument, the identifier
+%% works.
+\processGNUPLOTfile [two] [twoplots]
+\processGNUPLOTfile [four] [fourplots]
+
+\startGNUPLOTscript [myfunction]
+	plot sin(7*x) title 'script'
+\stopGNUPLOTscript
+
+\useGNUPLOTgraphic [two] [2]
+
+\useGNUPLOTgraphic [four]
+
+\useGNUPLOTgraphic [myfunction]
+
+\useGNUPLOTgraphic [two] [1]
+
+\useGNUPLOTgraphic [four] [1]
+
+\useGNUPLOTgraphic [two] [2]
+
+\stoptext
+

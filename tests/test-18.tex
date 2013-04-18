@@ -1,0 +1,29 @@
+\usemodule
+	[gnuplot]
+
+\setupexternalfilters
+	[cache=no]
+
+\setuplayout
+	[page]
+
+\starttext
+
+%% Test linejoin and linecap options
+\setupGNUPLOTterminal
+	[context]
+	[linewidth=10]
+
+\startGNUPLOTscript [myfunction]
+	plot 'somedata' with lines
+\stopGNUPLOTscript
+
+\useGNUPLOTgraphic [myfunction] [linecap=rounded]
+\useGNUPLOTgraphic [myfunction] [linecap=squared]
+\useGNUPLOTgraphic [myfunction] [linecap=squared]
+
+\useGNUPLOTgraphic [myfunction] [linejoin=rounded]
+\useGNUPLOTgraphic [myfunction] [linejoin=mitered]
+\useGNUPLOTgraphic [myfunction] [linejoin=beveled]
+
+\stoptext

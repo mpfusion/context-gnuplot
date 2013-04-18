@@ -1,0 +1,18 @@
+\usemodule
+	[gnuplot]
+
+\setupGNUPLOTterminal
+	[pdf]
+	[width=9cm,
+	 height=10cm]
+
+\starttext
+
+%% Test of width and height terminal settings
+\startGNUPLOTscript [myfunction]
+	plot sin(3*x)
+\stopGNUPLOTscript
+
+\useGNUPLOTgraphic [myfunction] [height=3cm]
+
+\stoptext

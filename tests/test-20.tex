@@ -1,0 +1,16 @@
+\usemodule
+	[gnuplot]
+
+\asciimode
+\starttext
+
+%% Test \asciimode
+\startGNUPLOTscript [myfunction]
+	plot sin(6*x) title 'script'
+\stopGNUPLOTscript
+
+\useGNUPLOTgraphic [myfunction]
+
+#3 and $3 is 100% correct
+
+\stoptext

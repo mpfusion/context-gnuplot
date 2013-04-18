@@ -1,0 +1,38 @@
+%% Bug
+%% dashlength not supported
+
+\usemodule
+	[gnuplot]
+
+\setupexternalfilters
+	[cache=no]
+
+\starttext
+
+%% Test dashed option
+\setupGNUPLOTterminal
+	[context]
+	[dashed=yes,
+	 dashlength=10,
+	 linewidth=3]
+
+\setupGNUPLOTterminal
+	[pdf]
+	[terminal={pdf dashed}]
+
+\startGNUPLOTscript [myfunction]
+	plot sin(4*x) linetype 3
+\stopGNUPLOTscript
+
+\startGNUPLOTscript [myotherfunction]
+	plot sin(x) linetype 3
+\stopGNUPLOTscript
+
+\useGNUPLOTgraphic [myfunction]
+
+\setupGNUPLOT [terminal=pdf]
+
+\useGNUPLOTgraphic [myotherfunction]
+
+\stoptext
+

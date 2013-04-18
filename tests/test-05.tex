@@ -1,0 +1,19 @@
+\usemodule
+	[gnuplot]
+
+\starttext
+
+\startGNUPLOTscript [myfunction]
+	plot x
+\stopGNUPLOTscript
+
+\startGNUPLOTscript [myotherfunction]
+	plot tan(x)
+\stopGNUPLOTscript
+
+%% Test second parameter with key-value pair
+\useGNUPLOTgraphic [myfunction] [linewidth=5]
+
+\useGNUPLOTgraphic [myotherfunction]
+
+\stoptext

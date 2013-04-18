@@ -1,0 +1,20 @@
+\usemodule
+	[gnuplot]
+
+%% Test thick linewidth
+\setupGNUPLOTterminal
+	[context]
+	[width=5in,
+	 height=2.5in,
+	 linewidth=10,
+	 fontscale=0.9]
+
+\starttext
+
+\startGNUPLOTscript [myfunction]
+	plot x
+\stopGNUPLOTscript
+
+\useGNUPLOTgraphic [myfunction]
+
+\stoptext

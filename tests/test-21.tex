@@ -1,0 +1,55 @@
+\usemodule
+	[gnuplot]
+
+\starttext
+
+%% Test context terminal
+\setupGNUPLOT [terminal=context]
+\startGNUPLOTscript [context]
+	plot sin(6*x) title 'context'
+\stopGNUPLOTscript
+\useGNUPLOTgraphic [context]
+
+%% Test pdf terminal
+\setupGNUPLOT [terminal=pdf]
+\startGNUPLOTscript [pdf]
+	plot sin(6*x) title 'pdf'
+\stopGNUPLOTscript
+\useGNUPLOTgraphic [pdf]
+
+%% Test pdfcairo terminal
+\setupGNUPLOT [terminal=pdfcairo]
+\startGNUPLOTscript [pdfcairo]
+	plot sin(7*x) title 'pdfcairo'
+\stopGNUPLOTscript
+\useGNUPLOTgraphic [pdfcairo]
+
+%% Test png terminal
+\setupGNUPLOT [terminal=png]
+\startGNUPLOTscript [png]
+	plot sin(6*x) title 'png'
+\stopGNUPLOTscript
+\useGNUPLOTgraphic [png]
+
+%% Test pngcairo terminal
+\setupGNUPLOT [terminal=pngcairo]
+\startGNUPLOTscript [pngcairo]
+	plot sin(5*x) title 'pngcairo'
+\stopGNUPLOTscript
+\useGNUPLOTgraphic [pngcairo]
+
+%% Test tikz terminal
+\setupGNUPLOT [terminal=tikz]
+\startGNUPLOTscript [tikz]
+	plot sin(4*x) title 'tikz'
+\stopGNUPLOTscript
+\useGNUPLOTgraphic [tikz]
+
+%% Test postscript terminal
+\setupGNUPLOT [terminal=postscript]
+\startGNUPLOTscript [postscript]
+	plot sin(6*x) title 'postscript'
+\stopGNUPLOTscript
+\useGNUPLOTgraphic [postscript]
+
+\stoptext

@@ -1,0 +1,22 @@
+\usemodule
+	[gnuplot]
+
+%% Test tikz terminal
+\setupGNUPLOT
+	[terminal=tikz]
+
+\starttext
+
+\startGNUPLOTscript [myfunction]
+	plot x
+\stopGNUPLOTscript
+
+\startGNUPLOTscript [other]
+	plot sin(7*x)
+\stopGNUPLOTscript
+
+\useGNUPLOTgraphic [other]
+
+\useGNUPLOTgraphic [myfunction]
+
+\stoptext

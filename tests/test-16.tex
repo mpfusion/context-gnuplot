@@ -1,0 +1,18 @@
+\usemodule
+	[gnuplot]
+
+%% Test style and color settings
+\setupGNUPLOTterminal
+	[context]
+	[style=\ttd,
+	 color=blue]
+
+\starttext
+
+\startGNUPLOTscript [myfunction]
+	plot sin(x)
+\stopGNUPLOTscript
+
+\useGNUPLOTgraphic [myfunction]
+
+\stoptext

@@ -1,0 +1,20 @@
+\usemodule
+	[gnuplot]
+
+\starttext
+
+%% Text plots without script
+\startGNUPLOT
+	plot cos(3*x)
+\stopGNUPLOT
+
+\startGNUPLOT [linewidth=10]
+	plot sin(3*x)
+\stopGNUPLOT
+
+\startGNUPLOT [width=10cm]
+	plot sin(3*x)
+\stopGNUPLOT
+
+
+\stoptext

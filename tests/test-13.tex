@@ -1,0 +1,21 @@
+\usemodule
+	[gnuplot]
+
+\starttext
+
+%% Test multiple plots and multiple terminals
+\startGNUPLOTscript [myfunction]
+	plot sin(3*x)
+\stopGNUPLOTscript
+
+\startGNUPLOTscript [myotherfunction]
+	plot sin(5*x)
+\stopGNUPLOTscript
+
+\useGNUPLOTgraphic [myfunction]
+
+\setupGNUPLOT [terminal=pdf]
+
+\useGNUPLOTgraphic [myotherfunction] [height=3cm, width=9cm]
+
+\stoptext
