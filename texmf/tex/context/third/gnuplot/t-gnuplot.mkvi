@@ -371,6 +371,16 @@
 	   #content
 	 \stopreusableMPgraphic}
 
+%D \macros
+%D   {startGNUPLOTpage}
+%D
+%D Gnuplot outputs the \METAPOST\ code in a \type{startGNUPLOTpage}
+%D environment when the \type{standalone} option is used.
+
+\definefittingpage
+	[GNUPLOTpage]
+	[\c!command=\meta_process_graphic_instance\????gnuplot]
+
 %D \stopsubject
 %D \startsubject [title=User interface]
 %D
@@ -479,4 +489,3 @@
 
 \protect
 \stopmodule
-
