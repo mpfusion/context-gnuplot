@@ -1,6 +1,6 @@
 %D \module
 %D   [       file=t-gnuplot,
-%D        version=2013.03.09,
+%D        version=2013.04.28,
 %D          title=\CONTEXT\ Extra Modules,
 %D       subtitle=\GNUPLOT\ Inclusion,
 %D         author={Hans Hagen, Taco Hoekwater, Mojca Miklavec, (Aditya Mahajan), Marco Patzer},
@@ -23,7 +23,7 @@
 %M \setuphead [subject] [page=no]
 %M \small
 
-\writestatus{loading}{Gnuplot (ver: 2013.03.09)}
+\writestatus{loading}{Gnuplot (ver: 2013.04.28)}
 
 \startmodule [gnuplot]
 
@@ -100,36 +100,6 @@
 \def\c!png       {png}
 \def\c!pngcairo  {pngcairo}
 \def\c!postscript{postscript}
-
-%D \stopsubject
-%D \startsubject [title=Probing for gnuplot binary and available terminals]
-
-\startluacode
-	thirddata.gnuplot = {}
-	local gnuplot = thirddata.gnuplot
-	local return_value, terminals
-	
-	return_value = os.execute "gnuplot --version"
-	
-	if not return_value or return_value ~= 0 then
-		logs.texerrormessage "gnuplot binary not found in PATH"
-	else
-		terminals = os.resultof "gnuplot -e 'set terminal'"
-		
-		-- context terminal is preferred, followed by the tikz terminal
-		-- and pdf as a fallback
-		
-		if terminals:match "ConTeXt" then
-			gnuplot.terminal = "context"
-		else if terminals:match "TikZ" then
-			gnuplot.terminal = "tikz"
-		else
-			gnuplot.terminal = "pdf"
-		end end
-	end
-	
-	gnuplot.terminal = "context"
-\stopluacode
 
 %D \stopsubject
 %D \startsubject [title=Externalfilter setup]
@@ -381,10 +351,11 @@
 		{\setgnuplotterminalparameter\c!height{3in}}
 \stoptexdefinition
 
-%D The default terminal is set when the module is loaded and depend on the
-%D available terminals.
+%D The default terminal is the \type{context} terminal. It is assumed that a
+%D recent enough \type{gnuplot} version is used which includes the
+%D \type{context} terminal.
 
-\setupGNUPLOT [\c!terminal=\ctxlua{context(thirddata.gnuplot.terminal)}]
+\setupGNUPLOT [\c!terminal=\c!context]
 
 %D \stopsubject
 %D \startsubject [title=Gnuplot setup]
