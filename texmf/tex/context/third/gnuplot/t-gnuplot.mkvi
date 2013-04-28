@@ -182,7 +182,10 @@
 	 \c!textstyle=\gnuplotterminalparameter\c!style,
 	 \c!textcolor=\gnuplotterminalparameter\c!color]
 
-\definetextext[gp]{\strut}
+\definetextext
+	[gp]
+	[#1]#2%%
+	{\switchtobodyfont[#1]\strut #2}
 
 %D The following definitions are local to the gnuplot \METAPOST\ instance and
 %D contain definitions for all gnuplot graphs using the context terminal.
