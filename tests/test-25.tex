@@ -1,0 +1,18 @@
+\usemodule
+	[gnuplot]
+
+\setupGNUPLOTterminal
+	[context]
+	[linewidth=10,
+	 linejoin=mitered,
+	 linecap=squared]
+
+\starttext
+
+%% Test if text labels overprint legend and tics placement with large line
+%% widths
+\startGNUPLOT
+	plot sin(2.5*x), sin(2*x)
+\stopGNUPLOT
+
+\stoptext
