@@ -12,6 +12,9 @@
 %% Test if text labels overprint legend and tics placement with large line
 %% widths
 \startGNUPLOT
+	set key opaque
+	set border front
+	set tics front
 	plot sin(2.5*x), sin(2*x)
 \stopGNUPLOT
 
