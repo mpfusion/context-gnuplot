@@ -1,0 +1,6 @@
+/tests/test-*.tuc
+/tests/test-*.log
+/tests/test-*.pdf
+/tests/test-*gnuplot*
+/tests/gnuplot-lua*
+/tests/t-gnuplot-lua-tikz.tex
