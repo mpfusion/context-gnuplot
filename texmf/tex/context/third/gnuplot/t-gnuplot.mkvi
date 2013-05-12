@@ -446,7 +446,7 @@
 	\edef\gnuplot@current_identifier{#identifier}
 
 	\setupGNUPLOTterminal[\currentgnuplotterminal][#options]
-	
+
 	%% If this macro is defined, the graphic was generated with
 	%% \processGNUPLOTfile and only needs to be read and not processed.
 
@@ -461,7 +461,7 @@
 				{\doifMPgraphicelse{\????gnuplot::\gnuplot@current_identifier \recurselevel}
 				{\reuseMPgraphic{\????gnuplot::\gnuplot@current_identifier \recurselevel}}
 				{\exitloop}}}}
-	
+
 	\popcatcodetable
 	\endgroup
 \stoptexdefinition
@@ -487,14 +487,14 @@
 %D \type{\startGNUPLOT} is an environment that takes a plot script and
 %D directly places the graph, similar to \type{\startMPcode}.
 
-\newcounter\gnuplot@c_inline_graphic
+\newcounter\c_gnuplot_inline_graphic
 
 \setvalue{\e!start\gnuplot@ui}%%
 	{\dosingleempty\gnuplot@inline_graphic}
 
 \starttexdefinition gnuplot@inline_graphic [#options]
-	\increment\gnuplot@c_inline_graphic
-	\edef\gnuplot@current_identifier{\gnuplot@c_inline_graphic}
+	\increment\c_gnuplot_inline_graphic
+	\edef\gnuplot@current_identifier{\c_gnuplot_inline_graphic}
 	\edef\gnuplot@inline_options{#options}
 
 	\grabbufferdata
