@@ -1,0 +1,39 @@
+\usemodule
+	[gnuplot]
+
+\setupGNUPLOTterminal
+	[context]
+	[fontscale=1.5]
+
+\starttext
+
+%% Test fontscale parameter
+
+\startGNUPLOT
+	set title "Sine function"
+	plot sin(x)
+\stopGNUPLOT
+
+\startGNUPLOT [fontscale=2]
+	set title "Cosine function"
+	plot cos(x)
+\stopGNUPLOT
+
+\setupGNUPLOT
+	[terminal=tikz]
+
+\setupGNUPLOTterminal
+	[tikz]
+	[fontscale=1.5]
+
+\startGNUPLOT
+	set title "Sine function"
+	plot sin(x)
+\stopGNUPLOT
+
+\startGNUPLOT [fontscale=2]
+	set title "Cosine function"
+	plot cos(x)
+\stopGNUPLOT
+
+\stoptext

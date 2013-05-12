@@ -34,21 +34,23 @@
 %D \startsubject [title=Interface]
 
 \startinterface all
-	\setinterfaceconstant {terminal}  {terminal}
-	\setinterfaceconstant {options}   {options}
-	\setinterfaceconstant {pointset}  {pointset}
-	\setinterfaceconstant {purge}     {purge}
+	\setinterfaceconstant {terminal}   {terminal}
+	\setinterfaceconstant {options}    {options}
+	\setinterfaceconstant {pointset}   {pointset}
+	\setinterfaceconstant {purge}      {purge}
 \stopinterface
 
 \startinterface all
-	\setinterfacevariable {dashed}    {dashed}
-	\setinterfacevariable {rounded}   {rounded}
-	\setinterfacevariable {butt}      {butt}
-	\setinterfacevariable {linejoin}  {linejoin}
-	\setinterfacevariable {linecap}   {linecap}
-	\setinterfacevariable {linewidth} {linewidth}
-	\setinterfacevariable {fontscale} {fontscale}
-	\setinterfacevariable {points}    {points}
+	\setinterfacevariable {dashed}     {dashed}
+	\setinterfacevariable {rounded}    {rounded}
+	\setinterfacevariable {butt}       {butt}
+	\setinterfacevariable {linejoin}   {linejoin}
+	\setinterfacevariable {linecap}    {linecap}
+	\setinterfacevariable {dashlength} {dashlength}
+	\setinterfacevariable {linewidth}  {linewidth}
+	\setinterfacevariable {fontscale}  {fontscale}
+	\setinterfacevariable {charsize}   {charsize}
+	\setinterfacevariable {points}     {points}
 \stopinterface
 
 %D \stopsubject
@@ -204,12 +206,12 @@
 		gp_color_foreground    := \MPcolor{currentcolor};
 		gp_color_lt[-2]        := gp_color_foreground;
 
-		linejoin               := \namedgnuplotterminalparameter{context}{linejoin};
-		linecap                := \namedgnuplotterminalparameter{context}{linecap};
-		gp_use_dashed          := \namedgnuplotterminalparameter{context}{dashed};
-		gp_scale_linewidth     := \namedgnuplotterminalparameter{context}{linewidth};
-		gp_scale_text          := \namedgnuplotterminalparameter{context}{fontscale};
-		gp_points_with         := gp_points_with_\namedgnuplotterminalparameter{context}{points};
+		linejoin               := \namedgnuplotterminalparameter\c!context\v!linejoin;
+		linecap                := \namedgnuplotterminalparameter\c!context\v!linecap;
+		gp_use_dashed          := \namedgnuplotterminalparameter\c!context\v!dashed;
+		gp_scale_linewidth     := \namedgnuplotterminalparameter\c!context\v!linewidth;
+		gp_scale_text          := \namedgnuplotterminalparameter\c!context\v!fontscale;
+		gp_points_with         := gp_points_with_\namedgnuplotterminalparameter\c!context{points};
 	enddef;
 \stopMPinitializations
 
@@ -239,25 +241,27 @@
 
 \defineGNUPLOTterminal
 	[\c!context]
-	[\c!terminal=\c!context,
+	[\c!terminal=\c!context\space
+		\v!fontscale\space\namedgnuplotterminalparameter\c!context\v!fontscale,
 	 \c!style=,
 	 \c!color=,
 	 \c!suffix=tex,
 	 \c!width=5in,      % *default* (5in) | <dimension>
 	 \c!height=3in,     % *default* (3in) | <dimension>
-	 linejoin=rounded,  % mitered | *rounded* | beveled
-	 linecap=butt,      % *butt*  | rounded (in gnuplot: round) | squared
-	 dashed=true,       % *yes*   | no
-	 dashlength=1,      % scaling factor for dash lengths
-	 linewidth=1,       % scaling factor for line widths (1.0 means 0.4bp)
-	 fontscale=1,       % scaling factor for text labels
-	 points=metapost,   % *metapost* | tex (Should points be drawn with MetaPost or TeX?)
+	 \v!linejoin=rounded,  % mitered | *rounded* | beveled
+	 \v!linecap=butt,      % *butt*  | rounded (in gnuplot: round) | squared
+	 \v!dashed=true,       % *yes*   | no
+	 \v!dashlength=1,      % scaling factor for dash lengths
+	 \v!linewidth=1,       % scaling factor for line widths (1.0 means 0.4bp)
+	 \v!fontscale=1,       % scaling factor for text labels
+	 \v!points=metapost,   % *metapost* | tex (Should points be drawn with MetaPost or TeX?)
 	 \c!pointset=\????gnuplot:pointset]
 
 \defineGNUPLOTterminal
 	[\c!tikz]
-	[\c!terminal={\c!tikz\space\c!context\space createstyle\space
-		charsize \the\d_gnuplot_hcharsize,\the\d_gnuplot_vcharsize},
+	[\c!terminal={\c!tikz\space\c!context\space createstyle
+		\v!fontscale\space\namedgnuplotterminalparameter\c!tikz\v!fontscale\space
+		\v!charsize\space\the\d_gnuplot_hcharsize,\the\d_gnuplot_vcharsize},
 	 \c!suffix=tex,
 	 \c!width=5in,
 	 \c!height=3in]
@@ -454,7 +458,7 @@
 		{\getvalue{gnuplot@process_file_#identifier}}
 		{\processgnuplotbuffer[\gnuplot@id #identifier]}
 
-	\doif\currentgnuplotterminal_terminal\c!context{
+	\doif\currentgnuplotterminal\c!context{
 		\doifsomethingelse{#num}
 			{\reuseMPgraphic{\????gnuplot::\gnuplot@current_identifier #num}}
 			{\doloop
