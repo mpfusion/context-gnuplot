@@ -1,6 +1,6 @@
 %D \module
 %D   [       file=t-gnuplot,
-%D        version=2013.05.12,
+%D        version=2013.05.13,
 %D          title=\CONTEXT\ Extra Modules,
 %D       subtitle=\GNUPLOT\ Inclusion,
 %D         author={Hans Hagen, Taco Hoekwater, Mojca Miklavec, (Aditya Mahajan), Marco Patzer},
@@ -23,7 +23,7 @@
 %M \setuphead [subject] [page=no]
 %M \small
 
-\writestatus{loading}{Gnuplot (ver: 2013.05.12)}
+\writestatus{loading}{Gnuplot (ver: 2013.05.13)}
 
 \startmodule [gnuplot]
 
@@ -467,11 +467,11 @@
 \stoptexdefinition
 
 %D \macros
-%D   {startGNUPLOTfile}
+%D   {processGNUPLOTfile}
 %D
-%D \type{startGNUPLOTfile} takes an identifier and a file name. The file is
-%D the output file created by gnuplot when the context terminal is used.
-%D gnuplot must be run manually in this case.
+%D \tex{processGNUPLOTfile} takes an identifier and a file name. The file is
+%D the output file created by \type{gnuplot} when the \type{context} terminal
+%D is used. \type{gnuplot} must be run manually in this case.
 
 \setvalue{process\gnuplot@ui file}%%
 	{\dodoubleempty\gnuplot@process_file}
