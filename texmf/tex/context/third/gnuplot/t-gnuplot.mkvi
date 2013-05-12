@@ -1,6 +1,6 @@
 %D \module
 %D   [       file=t-gnuplot,
-%D        version=2013.04.28,
+%D        version=2013.05.12,
 %D          title=\CONTEXT\ Extra Modules,
 %D       subtitle=\GNUPLOT\ Inclusion,
 %D         author={Hans Hagen, Taco Hoekwater, Mojca Miklavec, (Aditya Mahajan), Marco Patzer},
@@ -23,7 +23,7 @@
 %M \setuphead [subject] [page=no]
 %M \small
 
-\writestatus{loading}{Gnuplot (ver: 2013.04.28)}
+\writestatus{loading}{Gnuplot (ver: 2013.05.12)}
 
 \startmodule [gnuplot]
 
@@ -89,6 +89,7 @@
 
 \appendtoks
 	\doif\currentgnuplotterminal\c!context{\gnuplot@terminal_value_translation}
+	\doif\currentgnuplotterminal\c!tikz   {\gnuplot@calculate_charsize}
 \to\everysetupGNUPLOTterminal
 
 %D Some string constants, mostly for the terminals.
@@ -132,7 +133,6 @@
 %D depends on the used terminal.
 
 \starttexdefinition gnuplot@read_command #gnuplotoutput
-	
 	\pushcatcodetable
 	\catcodetable\ctxcatcodes
 
@@ -256,7 +256,8 @@
 
 \defineGNUPLOTterminal
 	[\c!tikz]
-	[\c!terminal=\c!tikz\space\c!context\space createstyle,
+	[\c!terminal={\c!tikz\space\c!context\space createstyle\space
+		charsize \the\d_gnuplot_hcharsize,\the\d_gnuplot_vcharsize},
 	 \c!suffix=tex,
 	 \c!width=5in,
 	 \c!height=3in]
@@ -359,6 +360,20 @@
 %D \type{context} terminal.
 
 \setupGNUPLOT [\c!terminal=\c!context]
+
+%D The following code is used in the TikZ terminal and passed as a terminal
+%D option to \type{gnuplot}. The zero is selected as a representative for the
+%D font height and width, the \quotation{g} is used as a representative for
+%D the depth.
+
+\newdimen\d_gnuplot_hcharsize
+\newdimen\d_gnuplot_vcharsize
+
+\starttexdefinition gnuplot@calculate_charsize
+	\global\d_gnuplot_hcharsize=1.05\fontcharwd\font`0
+	\global\d_gnuplot_vcharsize=1.05\fontcharht\font`0
+	\global\advance\d_gnuplot_vcharsize by 1.05\fontchardp\font`g
+\stoptexdefinition
 
 %D \stopsubject
 %D \startsubject [title=Gnuplot setup]

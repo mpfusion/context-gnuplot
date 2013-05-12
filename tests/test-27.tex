@@ -1,0 +1,34 @@
+\usemodule
+	[gnuplot]
+
+\setupGNUPLOT
+	[terminal=tikz]
+
+\starttext
+\unprotect
+
+%% Test TikZ terminal recalculate charsize
+\startGNUPLOT
+	plot sin(x)
+\stopGNUPLOT
+
+\startlines
+	\type{charsize} parameters passed to \type{gnuplot}
+	h: \the\d_gnuplot_hcharsize\par
+	v: \the\d_gnuplot_vcharsize
+\stoplines
+
+\switchtobodyfont [18pt]
+
+\startGNUPLOT
+	plot sin(x)
+\stopGNUPLOT
+
+\startlines
+	\type{charsize} parameters passed to \type{gnuplot}
+	h: \the\d_gnuplot_hcharsize\par
+	v: \the\d_gnuplot_vcharsize
+\stoplines
+
+\protect
+\stoptext
